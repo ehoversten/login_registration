@@ -1,6 +1,8 @@
 from flask import Flask, request, redirect, render_template, session, flash
+from flask_bcrypt import Bcrypt
 # import the function connectToMySQL from the file mysqlconnection.py
 from mysqlconnection import connectToMySQL
+
 
 import re
 # create a regular expression object that we can use run operations on
@@ -8,7 +10,8 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 app = Flask(__name__)
 app.secret_key = "Shh....It's a secret!"
-mysql = connectToMySQL('registration_db')
+bcrypt = Bcrypt(app)
+mysql = connectToMySQL('register_db')
 
 # print("all the users", mysql.query_db("SELECT * FROM users;"))
 
@@ -26,6 +29,7 @@ def validate():
     error_flag = 0
     # result = request.form
     # print(result)
+
     if len(request.form['first_name']) < 2:
         flash('First Name field cannot be blank')
         error_flag = 0
@@ -54,15 +58,20 @@ def validate():
 
 
     if error_flag == 0:
-        query = "INSERT INTO users(first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
+        # include some logic to validate user input before adding them to the database!
+        # create the hash
+        pw_hash = bcrypt.generate_password_hash(request.form['password'])
+        print(pw_hash)
+
+        query = "INSERT INTO users(first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password_hash)s);"
         data = {
             'first_name':request.form['first_name'],
             'last_name':request.form['last_name'],
             'email':request.form['email'],
-            'password':request.form['password']
+            'password_hash':pw_hash
             }
         mysql.query_db(query, data)
-
+        # print("Data dict: ", data)
 
         queryID = "SELECT * FROM users WHERE email = %(email)s;"
         query_result = mysql.query_db(queryID, data)
