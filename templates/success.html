@@ -56,7 +56,10 @@
         <h1>Welcome {{ session['first'] }}, you have been logged in</h1>
 
         <div class="button_div">
-          <button class="btn btn-success" type="button" name="button">Logout</button>
+          <form class="" action="/logout" method="post">
+            <button type<button class="btn btn-success" type="submit" name="logout">Logout</button>
+          </form>
+        
         </div>
       </div>
     </div>
