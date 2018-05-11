@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <style media="screen">
+      body {
+
+      }
+
+      .header {
+        height: 100px;
+        background-color: lightblue;
+      }
+
+      .navbar {
+        justify-content: center;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .button_div {
+        display: flex;
+        justify-content: center;
+      }
+
+      button {
+        margin-top: 20px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <nav class="navbar navbar-light">
+          <h1>Assignment: Login and Registration</h1>
+        </nav>
+      </div>
+      <div class="messages">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <p>{{message}}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+      <div class="success">
+        <h1>Welcome {{ session['first'] }}, you have been logged in</h1>
+
+        <div class="button_div">
+          <button class="btn btn-success" type="button" name="button">Logout</button>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <style media="screen">
+
+      .header {
+        height: 100px;
+        background-color: lightblue;
+      }
+
+      .navbar {
+        justify-content: center;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+
+      .registration_form, .login_form {
+        width: 500px;
+        display: inline-block;
+        margin-right: 50px;
+        padding: 20px;
+      }
+
+      input {
+        width: 100%;
+        padding: 7px;
+        margin: 10px 0px 10px 0px;
+      }
+
+      button {
+        margin-top: 20px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <nav class="navbar navbar-light">
+          <h1>Assignment: Login and Registration</h1>
+        </nav>
+      </div>
+      <div class="container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <ul>
+                <li>{{ message }}</li>
+              </ul>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div class="registration_form">
+          <h1>Register Here:</h1>
+
+          <form class="form-group row" action="/process" method="post">
+            <input type="hidden" name="id" value="">
+            First Name:
+            <input type="text" name="first_name" value="">
+            Last Name:
+            <input type="text" name="last_name" value="">
+            Email:
+            <input type="text" name="email" value="">
+            Password:
+            <input type="password" name="password" value="">
+            Confirm Password:
+            <input type="password" name="confirm" value="">
+            <button type="submit" name="registration_submit" class="btn btn-primary">Register</button>
+          </form>
+        </div>
+        <div class="login_form">
+          <h1>Login Here:</h1>
+
+          <form class="form-group row" action="/process" method="post">
+            Email:
+            <input type="text" name="login_email" value="">
+            Password:
+            <input type="password" name="login_password" value="">
+            <button type="submit" name="login_submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  </body>
+</html>
